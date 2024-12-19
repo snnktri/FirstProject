@@ -2,13 +2,25 @@ import dotenv from 'dotenv';
 // import mongoose from 'mongoose';
 // import { Db_Name } from './constant';
 import connectDB from './db/index.js';
+import { app } from './app'
 
 dotenv.config({
     path: './env'
 })
 
-connectDB();
+connectDB()
+.then(() => {
 
+    app.on("error", (error)=>{
+        console.log("Error occred in express:", error);
+    })
+    app.listen(process.env.PORT||3000, () => {
+        console.log('Server is listening at port:', process.env.PORT);
+    })
+})
+.catch((error)=>{
+    console.error("MONGO Db error:", error);
+})
 
 
 
