@@ -1,6 +1,6 @@
 import { v2 as cloudinary } from 'cloudinary'
 import fs from 'fs';
-import { errorMonitor } from 'stream';
+// import { errorMonitor } from 'stream';
 
 cloudinary.config({ 
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME, 
@@ -20,7 +20,8 @@ const upLoadOnClouninary = async (localFilePath) => {
         )
         //file hasbeen uploaded successfully
 
-        console.log("File is uploaded on cloudinary: " + response.url);
+        // console.log("File is uploaded on cloudinary: " + response.url);
+        fs.unlinkSync(localFilePath)
         return response;
 
     }
@@ -31,3 +32,5 @@ const upLoadOnClouninary = async (localFilePath) => {
         return null;
     }
 }
+
+export { upLoadOnClouninary };

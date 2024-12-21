@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt';
 
 const userSchema = new Schema( 
     {
-     name: {
+     username: {
         type: String,
         required: true,
         unique: true,
@@ -80,8 +80,7 @@ userSchema.methods.generateRefreshToken = function(){
         username: this.username,
         fullName: this.fullName
     },
-    process.env.REFRESH_TOKEN_SECRET=123123
-    ,
+    process.env.REFRESH_TOKEN_SECRET,
     {
         expiresIn: process.env.REFRESH_TOKEN_EXPIRY
     }
